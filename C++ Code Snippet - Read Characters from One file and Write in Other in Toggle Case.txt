@@ -1,0 +1,61 @@
+#include<iostream>
+#include<fstream>
+#include<ctype.h>
+ 
+using namespace std;
+ 
+int main()
+{
+    ifstream fin;
+    ofstream fout;
+ 
+    //creating a file and writing smething
+    fout.open("alex.txt",ios::out);
+    if(!fout){
+        cout<<"Error\n";
+        return -1;
+    }
+    //write text into file
+    fout<<"Hello World.";
+    fout.close();
+    //////////////////////////////////////
+ 
+    fin.open("alex.txt",ios::in);
+    fout.open("new.txt",ios::out);
+    if(!fin||!fout){
+        cout<<"ERROR\n";
+        return -1;
+    }
+ 
+    char ch;
+    while(fin)
+    {
+        if(fin.get(ch))
+        {
+            if(isupper(ch))
+                ch+=32;
+            else if(islower(ch))
+                ch-=32;
+        }
+        fout.put(ch);
+    }
+ 
+    fin.close();
+    fout.close();
+    //print the content of net.txt
+ 
+    fin.open("new.txt",ios::in);
+    if(!fin){
+        cout<<"Error";
+        return -1;
+    }
+    cout<<"Content of new.txt file :\n";
+    while(fin){
+        if(fin.get(ch))
+        cout<<ch;
+    }
+    cout<<endl;
+    fin.close();
+    ///////////////////////////////
+    return 0;
+}
